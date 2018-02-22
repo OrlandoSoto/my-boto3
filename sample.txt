@@ -1,2 +1,0 @@
-sample text file for S3 uploads
-take 3
