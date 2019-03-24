@@ -1,0 +1,30 @@
+{
+  "Parameters": {
+    "MyKeyName": {
+      "Description": "The EC2 Key Pair to allow SSH access to the instance",
+      "Type": "AWS::EC2::KeyPair::KeyName"
+    }
+  },
+
+    "Resources": {
+        "testEC2Instance": {
+            "Type": "AWS::EC2::Instance",
+            "Properties": {
+                "ImageId" : "ami-02bcbb802e03574ba",
+                "InstanceType" : "t2.micro",
+                "KeyName" : {"Ref":"MyKeyName"},
+                "SecurityGroups" : [ "default", "launch-wizard-1", "launch-wizard-2" ],
+                "BlockDeviceMappings" : [
+                  {
+                    "DeviceName" : "/dev/xvda",
+                    "Ebs" : {
+                      "VolumeType" : "gp2",
+                      "DeleteOnTermination" : "true",
+                      "VolumeSize" : "8"
+                    }
+                  }
+                ]
+            }
+        }
+    }
+}
